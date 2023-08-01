@@ -1,0 +1,35 @@
+% 绘制建筑物
+% 输入：建筑物顶点 （px_start, px_end, py_start, py_end, pz_start, pz_end）
+function plot_building(building_vertex)
+    px_start = building_vertex(1);
+    px_end   = building_vertex(2);
+    py_start = building_vertex(3);
+    py_end   = building_vertex(4);
+    pz_start = building_vertex(5);
+    pz_end   = building_vertex(6);
+    
+    % 组合为顶点
+    vertex_1 = [px_start, py_start, pz_start];
+    vertex_2 = [px_end, py_start, pz_start];
+    vertex_3 = [px_start, py_end, pz_start];
+    vertex_4 = [px_start, py_start, pz_end];
+    vertex_5 = [px_end, py_end, pz_start];
+    vertex_6 = [px_end, py_start, pz_end];
+    vertex_7 = [px_start, py_end, pz_end];
+    vertex_8 = [px_end, py_end, pz_end];
+    
+    plot3([vertex_1(1) vertex_2(1)], [vertex_1(2) vertex_2(2)], [vertex_1(3) vertex_2(3)]);
+    hold on
+    plot3([vertex_1(1) vertex_3(1)], [vertex_1(2) vertex_3(2)], [vertex_1(3) vertex_3(3)]);
+    plot3([vertex_1(1) vertex_4(1)], [vertex_1(2) vertex_4(2)], [vertex_1(3) vertex_4(3)]);
+    plot3([vertex_2(1) vertex_5(1)], [vertex_2(2) vertex_5(2)], [vertex_2(3) vertex_5(3)]);
+    plot3([vertex_2(1) vertex_6(1)], [vertex_2(2) vertex_6(2)], [vertex_2(3) vertex_6(3)]);
+    plot3([vertex_3(1) vertex_7(1)], [vertex_3(2) vertex_7(2)], [vertex_3(3) vertex_7(3)]);
+    plot3([vertex_3(1) vertex_5(1)], [vertex_3(2) vertex_5(2)], [vertex_3(3) vertex_5(3)]);
+    plot3([vertex_4(1) vertex_6(1)], [vertex_4(2) vertex_6(2)], [vertex_4(3) vertex_6(3)]);
+    plot3([vertex_4(1) vertex_7(1)], [vertex_4(2) vertex_7(2)], [vertex_4(3) vertex_7(3)]);
+    plot3([vertex_5(1) vertex_8(1)], [vertex_5(2) vertex_8(2)], [vertex_5(3) vertex_8(3)]);
+    plot3([vertex_6(1) vertex_8(1)], [vertex_6(2) vertex_8(2)], [vertex_6(3) vertex_8(3)]);
+    plot3([vertex_7(1) vertex_8(1)], [vertex_7(2) vertex_8(2)], [vertex_7(3) vertex_8(3)]);
+end
+

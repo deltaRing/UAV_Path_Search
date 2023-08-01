@@ -1,0 +1,23 @@
+close all
+clear all
+clc
+
+addpath map
+addpath utils
+addpath define
+addpath algorithm
+
+figure(10000)
+% ½¨Á¢µØÍ¼
+map = map_init(100, 100, 100, 0);
+[map, series] = set_building(map, 10, 10, 1, 10, 10, 10, 1);
+plot_building(series);
+[map, series] = set_building(map, 50, 20, 3, 10, 10, 50, 1);
+plot_building(series);
+map = map_init(100, 100, 100, 0);
+[map, series] = set_building(map, 10, 10, 1, 10, 10, 10, 1);
+plot_building(series);
+[map, series] = set_building(map, 50, 20, 3, 10, 10, 50, 1);
+plot_building(series);
+
+axis([0 100 0 100 0 100])

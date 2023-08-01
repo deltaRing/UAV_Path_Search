@@ -1,0 +1,15 @@
+% Drone_Azimuth 通过PID 更新无人机的角度 
+% 输入1：current_az  当前的方位角
+% 输入2：expected_az 期望的方位角
+% 输入3：dt          推进时间
+% 输入4：p           
+% 输入5：i
+% 输入6：d
+%
+function azimuth = drone_azimuth(current_az, expected_az, dt, ...
+    p, i, d)
+
+
+
+end
+

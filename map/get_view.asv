@@ -1,0 +1,51 @@
+% 利用光线追踪的方法 得到当前所见的一切 （利用了）
+% 输入1：地图
+% 输入2：当前坐标
+% 输入3：方位角
+% 输入4：俯仰角
+% 输入5：最远距离
+% 输入6：最大方位角
+% 输入7：最大俯仰角
+% 返回：所见到的一切
+
+%  角度定义
+%    Z
+%    /\
+%    |    0 degree
+%    |    | Elevation
+%    |    |  /  0 degree
+%    |    |^/  Azimuth
+%    |     /_)_____
+%    |   Original Point
+%    |____________________> Y
+%   /
+%  /    
+%|/_
+% X
+
+function map_seen = get_view(map, current_location, azimuth, elevation, ...
+        maximum_distance, maximum_azimuth, maximum_elevation)
+    if nargin == 4
+        maximum_distance = 10;
+        
+    end
+    
+    
+    % 运行定义
+    map_define;
+
+    sx = size(map, 1);
+    sy = size(map, 2);
+    sz = size(map, 3);
+    map_seen = ones(sx, sy, sz) * unknown;
+    
+    for aa = -maximum_azimuth:0.1:maximum_azimuth
+        for ee = -maximum_elevation:0.1:maximum_elevation
+            for rr = 0:1:maximum_distance
+                
+            end
+        end
+    end
+    
+end
+
