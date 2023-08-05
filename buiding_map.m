@@ -6,6 +6,7 @@ addpath map
 addpath utils
 addpath define
 addpath define/Dstar
+addpath define/Dstar/Utils
 addpath define/Dstar/State
 addpath define/Dstar/Dstar_algorithm
 addpath algorithm
