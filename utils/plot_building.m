@@ -18,6 +18,12 @@ function plot_building(building_vertex)
     vertex_7 = [px_start, py_end, pz_end];
     vertex_8 = [px_end, py_end, pz_end];
     
+%     point_sequence=[1,2,3,4]; %点连接的顺序
+%     square_xyz=[3,1,3;1,1,3;1,-1,3;3,-1,3]; %三维坐标4x3矩阵
+%     patch('Faces',point_sequence,'Vertices',square_xyz,'FaceColor','blue');
+%     axis([-3,3,-3,3,-3,3]);%坐标系范围
+%     view(3);
+    
     plot3([vertex_1(1) vertex_2(1)], [vertex_1(2) vertex_2(2)], [vertex_1(3) vertex_2(3)]);
     hold on
     plot3([vertex_1(1) vertex_3(1)], [vertex_1(2) vertex_3(2)], [vertex_1(3) vertex_3(3)]);

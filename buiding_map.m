@@ -59,7 +59,7 @@ for ii = 1:length(point_x_list)
         point_y_list(ii) / dy, point_z_list(ii) / dz, ...
         size_x_list(ii) / dx, size_y_list(ii) / dy, ...
         size_z_list(ii) / dz, obstacle);
-    plot_building(series);
+    plot_building_2(series);
     map_series = [map_series; series];
 end
 
@@ -94,7 +94,7 @@ plot_TSDF(TSDF, 0.1)
 % 绘制路径
 figure(10003)
 for ii = 1:size(map_series, 1)
-    plot_building(map_series(ii,:));
+    plot_building_2(map_series(ii,:));
 end
 hold on
 
@@ -115,4 +115,7 @@ Dstar = Dstar_run(Dstar, start_state, end_state);
 plot_Dstar_path(Dstar, current_location)
 
 % 测试实时更新数据
-Dstar_realtime(map, start_state, end_state, azimuth, elevation, map_series);
+[path, azis, eles, QRecord, QRecordEnd, QoptRecord, ScannerRecord] = Dstar_realtime(map, start_state, end_state, azimuth, elevation, map_series);
+
+dynamic_path_search(QRecord, QRecordEnd, ScannerRecord, map_series, [20 20 20]);
+static_path_search(QRecord, QRecordEnd, ScannerRecord, map_series, map);
