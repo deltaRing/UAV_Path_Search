@@ -5,7 +5,7 @@
 % 输出4： new_path 最新的b样条路径
 function new_path = b_spline_generate(Path_point, dt, order)
     if nargin == 1
-        dt = 0.01;
+        dt = 0.005;
         order = 3;
     end
     % 最新的B样条路径赋予初值
