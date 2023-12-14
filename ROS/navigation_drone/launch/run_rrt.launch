@@ -1,0 +1,26 @@
+<launch>
+
+<arg name="map_size_x" default="10.0"/>
+<arg name="map_size_y" default="10.0"/>
+<arg name="map_size_z" default=" 5.0"/>
+
+<arg name="cloud_margin" default=" 0.0"/>
+<arg name="resolution" default=" 0.2"/>
+
+<arg name="start_x" default=" 0.0"/>
+<arg name="start_y" default=" 0.0"/>
+<arg name="start_z" default=" 1.0"/>
+
+<node pkg="navigation_drone" type="rrt_node" name="_rrt_node_">
+	<param name="map/margin"       value="$(arg cloud_margin)" />
+	<param name="map/resolution"   value="$(arg resolution)" />
+	<param name="map/x_size"       value="$(arg map_size_x)"/>
+	<param name="map/y_size"       value="$(arg map_size_y)"/>
+	<param name="map/z_size"       value="$(arg map_size_z)"/>
+
+	<param name="planning/start_x" value="$(arg start_x)"/>
+	<param name="planning/start_y" value="$(arg start_y)"/>
+	<param name="planning/start_z" value="$(arg start_z)"/>
+</node>
+
+</launch>
