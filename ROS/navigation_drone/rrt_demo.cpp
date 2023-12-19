@@ -92,9 +92,9 @@ int main(int argc, char** argv)
     // 偏航角PID
     double yaw_p = 0.08025, yaw_i = 0.06015, yaw_d = 0.02725;
     // 设置PID
-    nh.param<double>("yaw_p", yaw_p, 0.08225);
-    nh.param<double>("yaw_i", yaw_i, 0.06125); 
-    nh.param<double>("yaw_d", yaw_d, 0.02855); 
+    nh.param<double>("yaw_p", yaw_p, 1.754225);
+    nh.param<double>("yaw_i", yaw_i, 0.09125); 
+    nh.param<double>("yaw_d", yaw_d, 0.03855); 
     _map_lower << - _x_size/2.0, - _y_size/2.0,     0.0;
     _map_upper << + _x_size/2.0, + _y_size/2.0,  +_z_size ;
     _inv_resolution = 1.0 / _resolution;
