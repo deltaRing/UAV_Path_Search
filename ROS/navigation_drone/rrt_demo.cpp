@@ -76,22 +76,27 @@ int main(int argc, char** argv)
     nh.param<std::string>("map_link", map_link, "/map");
     nh.param<std::string>("drone_link", drone_link, "/base_link");
     nh.param<std::string>("camera_link", camera_link, "/camera_link");
-    nh.param<double>("drone_flying_height", drone_fly_height, 1.0);
+    nh.param<double>("drone_flying_height", drone_fly_height, 0.75);
     nh.param<double>("close_threshold", close_thres, 1.0);
     nh.param<double>("far_tbreshold", far_thres, 6.0);
 
-    nh.param<int>("expand_range", expand_range, 8);
+    nh.param<int>("expand_range", expand_range, 4); // 正负4
     nh.param<bool>("debug_pc", debug_pc, false);
     nh.param<bool>("debug_path", debug_path, false);
     nh.param<bool>("send_map", send_map, true);
     nh.param<bool>("print_posture", posture_info, false);
     nh.param<double>("low_battery", low_battery, 3.5);
-    nh.param<double>("velocity_drone", velocity_drone, 0.25);
-    nh.param<double>("acc_drone", acc_drone, 5.0);
+    nh.param<double>("velocity_drone", velocity_drone, 0.5); // 最大允许速度
+    nh.param<double>("acc_drone", acc_drone, 5.0); // 最大允许加速度
 
+    // 偏航角PID
+    double yaw_p = 0.08025, yaw_i = 0.06015, yaw_d = 0.02725;
+    // 设置PID
+    nh.param<double>("yaw_p", yaw_p, 0.08225);
+    nh.param<double>("yaw_i", yaw_i, 0.06125); 
+    nh.param<double>("yaw_d", yaw_d, 0.02855); 
     _map_lower << - _x_size/2.0, - _y_size/2.0,     0.0;
     _map_upper << + _x_size/2.0, + _y_size/2.0,  +_z_size ;
-    
     _inv_resolution = 1.0 / _resolution;
     
     _max_x_id = (int)(_x_size * _inv_resolution);
@@ -113,6 +118,7 @@ int main(int argc, char** argv)
     droneStatus->setMapGLz(_RRTstar_preparatory->getMapLowerBoundZ());
     droneStatus->setIsObs(_RRTstar_preparatory->getObsNum());
     droneStatus->setResolution(_resolution);
+    droneStatus->setYawPID(yaw_p, yaw_i, yaw_d);
 
     ros::Rate rate(10);
 

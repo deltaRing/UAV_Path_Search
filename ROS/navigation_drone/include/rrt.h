@@ -16,7 +16,7 @@ class RRTstarPreparatory{
 		// 每次都 + 2
 		// 更新的时候 每次 - 1
 		// 观测达到一定次数的时候 直接不再观测 转为1
-		uint8_t confirmObservedFrame = 7;
+		uint8_t confirmObservedFrame = 8;
 		uint8_t isObs = 255; // 如果是这个数字 是障碍物
 
 		int GLX_SIZE, GLY_SIZE, GLZ_SIZE;

@@ -21,7 +21,7 @@ double get_weight_N(double t, Eigen::ArrayXd NodeVector, int k, int m);
 // 输入2：dt
 // 输入3：order 几阶的B样条曲线
 //输出：b样条曲线
-std::vector<Eigen::Vector3d> generate_b_spline_path(std::vector<Eigen::Vector3d> Path_point, double dt = 0.005, unsigned int order = 3);
+std::vector<Eigen::Vector3d> generate_b_spline_path(std::vector<Eigen::Vector3d> Path_point, double dt = 0.001, unsigned int order = 3);
 
 // 平滑B样条曲线
 // 输入1：bspline B样条曲线
@@ -34,6 +34,9 @@ std::vector<Eigen::Vector3d> generate_b_spline_path(std::vector<Eigen::Vector3d>
 std::vector<Eigen::Vector3d> smooth_b_spline_path(std::vector<Eigen::Vector3d> bspline, Eigen::Vector3d _start_pt_, Eigen::Vector3d _end_pt_, double _init_ratio_ = 0.05, double _end_ratio_ = 0.125);
 
 // 给RRT路线插值
-std::vector<Eigen::Vector3d> interpolation_to_RRT(std::vector <Eigen::Vector3d> RRT_node, double dx = 0.05);
+std::vector<Eigen::Vector3d> interpolation_to_RRT(std::vector <Eigen::Vector3d> RRT_node, double dx = 0.001);
+
+// 选择合理的路径点
+std::vector<Eigen::Vector3d> select_waypoint(std::vector<Eigen::Vector3d> waypoints, double distance = 0.3);
 
 #endif

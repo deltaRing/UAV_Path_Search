@@ -51,12 +51,17 @@ private:
     uint8_t isObs = -1;
     int GLX_SIZE = -1, GLY_SIZE = -1, GLZ_SIZE = -1;       // 地图大小
     double gl_xl = -1e9, gl_yl = -1e9, gl_zl = -1e9;            // lower bound
-    double detect_range = 2.0;                                                // 探测范围
+    double detect_range = 2.5;                                                // 探测范围
     double resolution = -1, inv_resolution = -1;               // 地图分辨率
+    double current_yaw = -1, current_pitch = -1, current_roll = -1;  // 当前的姿态角
+    double yaw_int = 0.0; // yaw 积分项误差
+    double yaw_diff = 0.0; // yaw 微分项误差
+    // 偏航角PID
+    double yaw_p = 0.08025, yaw_i = 0.06015, yaw_d = 0.02725;
     uint8_t * map = NULL;                                                         // 地图
     bool battery_is_set = false;                   
-    double range_threshold = 0.05;                                         // 0.05 meter 
-    double expected_velocity = 0.1;                                       // 允许速度 0.1m/s
+    double range_threshold = 0.1;                                         // 0.1 meter 
+    double expected_velocity = 0.2;                                       // 允许速度 0.2m/s
     std::vector<Eigen::Vector3d> theRoute;                         // 设置的新路线
     mavros_msgs::PositionTarget expected_posture;    // 期望位置姿态
     geometry_msgs::PoseStamped currect_posture;     //  当前真实的位置姿态
@@ -68,6 +73,7 @@ private:
     bool need_rc = false;                                                    // 是否需要遥控
 public:
     DroneStatus();
+    void setYawPID(double p, double i, double d);
     void setExpectedVelocity(double new_expected_velocity);
     void setDetectRange(double new_detect_range);
     void setCurrectPosture(geometry_msgs::PoseStamped Posture);
@@ -89,6 +95,7 @@ public:
     void setMapGLy(double _gl_yl);
     void setMapGLz(double _gl_zl);
     bool setMode();
+    double getExpectedVelocity() { return expected_velocity; }
     void checkMode();
     void resetExpectedPosture();
     void update();

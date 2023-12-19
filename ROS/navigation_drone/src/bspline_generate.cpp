@@ -113,3 +113,16 @@ std::vector<Eigen::Vector3d> interpolation_to_RRT(std::vector <Eigen::Vector3d> 
 
     return nodes;
 }
+
+std::vector<Eigen::Vector3d> select_waypoint(std::vector<Eigen::Vector3d> waypoints, double distance) {
+    std::vector<Eigen::Vector3d> nodes;
+    Eigen::Vector3d node_start = waypoints[0];
+    //nodes.push_back(node_start);
+    for (int ii = 1; ii < waypoints.size(); ii++) {
+        if ((node_start - waypoints[ii]).norm() > distance){
+            nodes.push_back(waypoints[ii]);
+            node_start = waypoints[ii];
+        }
+    }
+    return nodes;
+}
