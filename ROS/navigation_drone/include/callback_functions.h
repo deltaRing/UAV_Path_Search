@@ -52,6 +52,8 @@
 #include <pcl_ros/transforms.h>
 // 用多线程来处理OMPL问题
 #include <thread>
+// 路径优化
+#include "path_optimal/path_optimal.h"
 
 using namespace std;
 using namespace Eigen;

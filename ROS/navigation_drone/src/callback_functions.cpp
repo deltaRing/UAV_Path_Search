@@ -16,6 +16,8 @@ bool debug_pc = false;
 bool debug_path = false;
 // 发送单帧点云还是整个地图
 bool send_map = false;
+// 是否优化路线
+bool optimize_path = false;
 
 Eigen::Vector3d _start_pt;
 Eigen::Vector3d _map_lower, _map_upper;
@@ -346,18 +348,29 @@ void visRRTstarPath(vector<Vector3d> nodes )
 // 显示B样条曲线的效果
 void visRRTstarPathBSpline(vector<Vector3d> nodes){
     vector<Vector3d> bspline = generate_b_spline_path(nodes);
+
     if (bspline.size() <= 0) { 
         ROS_INFO("[node] using RRT");
         nodes = interpolation_to_RRT(nodes);
         nodes = select_waypoint(nodes);
+        if (optimize_path) {
+            std::vector<ObstacleNode> obstacles;
+            FindObstacleVector(nodes, _RRTstar_preparatory, 3.0, obstacles);
+            optimizePath(nodes, obstacles);
+        }
         droneStatus->setNewRoute(nodes); 
-        return; 
+        bspline = nodes; 
     } // 没有结果
     else { 
         ROS_INFO("[node] using bspline");
         Vector3d start_pt = nodes[0], end_pt = nodes[nodes.size() - 1];
         bspline = smooth_b_spline_path(bspline, start_pt, end_pt);
         bspline = select_waypoint(bspline, droneStatus->getExpectedVelocity());
+        if (optimize_path) {
+            std::vector<ObstacleNode> obstacles;
+            FindObstacleVector(bspline, _RRTstar_preparatory, 3.0, obstacles);
+            optimizePath(bspline, obstacles);
+        }
         droneStatus->setNewRoute(bspline); 
     }
 

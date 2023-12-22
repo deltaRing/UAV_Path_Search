@@ -1,5 +1,6 @@
 #include "drone_move.h"
 #include "callback_functions.h"
+#include "path_optimal/path_optimal.h"
 
 // 发布消息
 ros::Subscriber state_sub, battery_sub;
@@ -14,7 +15,7 @@ double velocity_drone = 1.0;
 double acc_drone = 5.0;
 // 膨胀体积
 extern int expand_range;
-extern RRTstarPreparatory * _RRTstar_preparatory;;
+extern RRTstarPreparatory * _RRTstar_preparatory;
 
 DroneStatus::DroneStatus() { 
     offb_set_mode.request.custom_mode = "OFFBOARD";

@@ -24,6 +24,7 @@ find_package(Eigen3 REQUIRED)
 find_package(Sophus REQUIRED)
 find_package(ompl REQUIRED)
 find_package(PCL REQUIRED)
+find_package(Ceres REQUIRED)
 
 ###################################
 ## catkin specific configuration ##
@@ -42,6 +43,7 @@ include_directories(
   ${PCL_INCLUDE_DIRS}
   ${OMPL_INCLUDE_DIRS}
   ${Sophus_INCLUDE_DIRS}
+  ${CERES_INCLUDE_DIRS} 
 )
 
 catkin_package(
@@ -60,6 +62,7 @@ add_executable(rrt_node
   src/drone_move.cpp
   src/callback_functions.cpp
   src/bspline_generate.cpp
+  src/path_optimal/path_optimal.cpp
   )
 
 ## Specify libraries to link a library or executable target against
@@ -68,4 +71,5 @@ target_link_libraries(rrt_node
    ${PCL_LIBRARIES}
    ${OMPL_LIBRARIES}
    ${Sophus_LIBRARIUES}
+   ${CERES_LIBRARIES} 
 )

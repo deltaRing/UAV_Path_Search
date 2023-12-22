@@ -42,6 +42,7 @@ class RRTstarPreparatory{
 		int getMapSizeX() { return GLX_SIZE; }
 		int getMapSizeY() { return GLY_SIZE; }
 		int getMapSizeZ() { return GLZ_SIZE; }
+		double getResolution() { return resolution; }
 		double getMapLowerBoundX() { return gl_xl; }
 		double getMapLowerBoundY() { return gl_yl; }
 		double getMapLowerBoundZ() { return gl_zl; }

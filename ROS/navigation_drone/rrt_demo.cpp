@@ -21,7 +21,7 @@ extern RRTstarPreparatory * _RRTstar_preparatory ;
 // 观测到的点云
 extern pcl::PointCloud<pcl::PointXYZ> cloud_vis;
 // 一些测试符号
-extern bool debug_pc, debug_path, send_map;
+extern bool debug_pc, debug_path, send_map, optimize_path;
 // 是否显示姿态
 bool posture_info = false;
 // 设置近距离阈值和远距离阈值
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
     
     nh.param("map/x_size", _x_size, 20.0);
     nh.param("map/y_size", _y_size, 20.0);
-    nh.param("map/z_size", _z_size, 10.0 );
+    nh.param("map/z_size", _z_size, 2.5 );
     
     nh.param("planning/start_x",  _start_pt(0),  0.0);
     nh.param("planning/start_y",  _start_pt(1),  0.0);
@@ -76,14 +76,15 @@ int main(int argc, char** argv)
     nh.param<std::string>("map_link", map_link, "/map");
     nh.param<std::string>("drone_link", drone_link, "/base_link");
     nh.param<std::string>("camera_link", camera_link, "/camera_link");
-    nh.param<double>("drone_flying_height", drone_fly_height, 0.75);
+    nh.param<double>("drone_flying_height", drone_fly_height, 0.85);
     nh.param<double>("close_threshold", close_thres, 1.0);
-    nh.param<double>("far_tbreshold", far_thres, 6.0);
+    nh.param<double>("far_tbreshold", far_thres, 5.0);
 
     nh.param<int>("expand_range", expand_range, 4); // 正负4
     nh.param<bool>("debug_pc", debug_pc, false);
     nh.param<bool>("debug_path", debug_path, false);
     nh.param<bool>("send_map", send_map, true);
+    nh.param<bool>("optimize_path", optimize_path, true);
     nh.param<bool>("print_posture", posture_info, false);
     nh.param<double>("low_battery", low_battery, 3.5);
     nh.param<double>("velocity_drone", velocity_drone, 0.5); // 最大允许速度
@@ -92,7 +93,7 @@ int main(int argc, char** argv)
     // 偏航角PID
     double yaw_p = 0.08025, yaw_i = 0.06015, yaw_d = 0.02725;
     // 设置PID
-    nh.param<double>("yaw_p", yaw_p, 1.754225);
+    nh.param<double>("yaw_p", yaw_p, 3.254225);
     nh.param<double>("yaw_i", yaw_i, 0.09125); 
     nh.param<double>("yaw_d", yaw_d, 0.03855); 
     _map_lower << - _x_size/2.0, - _y_size/2.0,     0.0;
